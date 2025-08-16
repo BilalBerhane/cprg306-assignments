@@ -1,4 +1,4 @@
-export default function StudentInfo() {
+ export default function StudentInfo() {
   const name = "Bilal Berhane";
   const repoUrl = "https://github.com/BilalBerhane/cprg306-assignments.git"; 
 
