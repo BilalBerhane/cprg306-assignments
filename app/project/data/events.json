@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Hack Night",
+    "date": "2025-09-05T18:00:00",
+    "venue": "SAIT Campus Centre",
+    "address": "1301 16 Ave NW, Calgary",
+    "description": "Casual coding + pizza."
+  },
+  {
+    "id": "2",
+    "title": "Career Fair",
+    "date": "2025-09-12T10:00:00",
+    "venue": "Heritage Hall",
+    "address": "1301 16 Ave NW, Calgary",
+    "description": "Meet employers and practice pitches."
+  },
+  {
+    "id": "3",
+    "title": "Soccer Final Watch",
+    "date": "2025-09-20T14:00:00",
+    "venue": "Student Lounge",
+    "address": "1301 16 Ave NW, Calgary",
+    "description": "Game on the big screen."
+  },
+  {
+    "id": "4",
+    "title": "Study Jam",
+    "date": "2025-09-27T09:30:00",
+    "venue": "Library Floor 2",
+    "address": "1301 16 Ave NW, Calgary",
+    "description": "Quiet study with snacks."
+  },
+  {
+    "id": "5",
+    "title": "Board Game Night",
+    "date": "2025-10-03T18:30:00",
+    "venue": "Commons",
+    "address": "1301 16 Ave NW, Calgary",
+    "description": "Bring a game or join one."
+  }
+]
