@@ -3,17 +3,17 @@
 import { useState } from "react";
 
 export default function NewItem() {
-    const [count, setCount] = useState(1);
+    const [count, setQuantity] = useState(1);
 
     const increment = () => {
         if (count <20) {
-            setCount(count + 1);
+            setQuantity(count + 1);
         }
     };
 
     const decrement = () => {
         if (count > 1) {
-            setCount(count - 1);
+            setQuantity(count - 1);
         }
     };
         const buttonClass = (disabled) => {
