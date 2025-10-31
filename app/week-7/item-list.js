@@ -2,31 +2,27 @@
 
 import { useState } from "react";
 import Item from "./item";
-import itemsData from "./items.json";
 
-export default function ItemList() {
+export default function ItemList({ items = [] }) {
   const [sortBy, setSortBy] = useState("name");
   const [grouped, setGrouped] = useState(false);
 
   const sortByName = (a, b) => a.name.localeCompare(b.name);
   const sortByCategory = (a, b) => a.category.localeCompare(b.category);
 
-  
-  let sortedItems = [...itemsData];
+  let sortedItems = [...items];
   if (sortBy === "name") {
     sortedItems.sort(sortByName);
   } else if (sortBy === "category") {
     sortedItems.sort(sortByCategory);
   }
 
-  
   const groupedItems = sortedItems.reduce((acc, item) => {
     const cat = item.category;
     (acc[cat] ||= []).push(item);
     return acc;
   }, {});
 
-  
   const sortedCategoryKeys = Object.keys(groupedItems).sort();
 
   return (
@@ -38,7 +34,7 @@ export default function ItemList() {
             setGrouped(false);
             setSortBy("name");
           }}
-          className={`w-36 h- rounded-md font-bold transition text-amber-400 border- ${
+          className={`w-36 h-16 rounded-md font-bold transition text-amber-400 border-2 ${
             sortBy === "name" && !grouped
               ? "bg-slate-800 border-black"
               : "bg-slate-700 border-gray-500"
@@ -79,7 +75,6 @@ export default function ItemList() {
         </button>
       </div>
 
-      
       {!grouped ? (
         <ul className="space-y-2">
           {sortedItems.map((item) => (
@@ -90,10 +85,9 @@ export default function ItemList() {
           ))}
         </ul>
       ) : (
-        
         <div className="space-y-6">
           {sortedCategoryKeys.map((category) => (
-            <div key={category} className="bg-slate-700 rounded-md p-4">
+            <div key={category} className="bg-slate-600 rounded-md p-4">
               <h2 className="text-amber-400 font-bold text-lg mb-2 capitalize">
                 {category}
               </h2>
