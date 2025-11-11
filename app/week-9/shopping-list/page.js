@@ -51,7 +51,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-slate-800 flex flex-col md:flex-row justify-center items-start gap-10 py-10 px-4">
-      {/* Left: Shopping List + Form */}
+      
       <div className="w-full max-w-md">
         <h1 className="text-4xl font-extrabold text-yellow-400 mb-6">
           Shopping List + Meal Ideas
@@ -62,7 +62,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Right: Meal Ideas */}
+      
       <div className="w-full max-w-md">
         <MealIdeas ingredient={selectedItemName} />
       </div>
