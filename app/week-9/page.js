@@ -17,7 +17,7 @@ export default function Page() {
         </button>
       ) : (
         <>
-          <p className="text-center text-[white]">
+          <p className="text-center text-white">
             Welcome, <strong>{user.displayName}</strong> ({user.email})
           </p>
           <p>

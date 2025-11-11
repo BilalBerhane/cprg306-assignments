@@ -1,7 +1,7 @@
 "use client";
 
 import { useUserAuth } from "../_utils/auth-context";
-export default function page() {
+export default function Page() {
     const { user } = useUserAuth();
     if (!user) {
         return(

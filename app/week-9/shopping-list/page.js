@@ -6,20 +6,20 @@ import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
 import itemsData from "./items.json";
-import { useUserAuth } from "../_utils/auth-context";
+import { useUserAuth } from "./_utils/auth-context";
 
 export default function Page() {
   const router = useRouter();
   const { user } = useUserAuth();
 
-  // If not logged in, send to landing page
+
   useEffect(() => {
     if (user === null) {
       router.push("/");
     }
   }, [user, router]);
 
-  // Optionally render nothing or a tiny placeholder while we check/redirect
+
   if (user === null) {
     return null;
   }
