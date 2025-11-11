@@ -15,7 +15,7 @@ const AuthContext = createContext(null);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const signingRef = useRef(false); // prevent re-entrancy
+  const signingRef = useRef(false); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -23,10 +23,10 @@ export const AuthContextProvider = ({ children }) => {
       setLoading(false);
     });
     return unsubscribe;
-  }, []); // <-- only subscribe once
+  }, []);
 
   const gitHubSignIn = async () => {
-    if (signingRef.current) return; // ignore a 2nd click while popup is open
+    if (signingRef.current) return;
     signingRef.current = true;
 
     try {
@@ -35,9 +35,9 @@ export const AuthContextProvider = ({ children }) => {
     } catch (err) {
       if (err?.code === "auth/popup-blocked" || err?.code === "auth/cancelled-popup-request") {
         const provider = new GithubAuthProvider();
-        await signInWithRedirect(auth, provider); // reliable on Safari/iOS
+        await signInWithRedirect(auth, provider); 
       } else {
-        throw err; // surface real errors
+        throw err;
       }
     } finally {
       signingRef.current = false;
