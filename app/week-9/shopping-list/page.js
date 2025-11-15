@@ -6,12 +6,13 @@ import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./meal-ideas";
 import itemsData from "./items.json";
-import { useUserAuth } from "./_utils/auth-context";
+import { useUserAuth } from "../_utils/auth-context";
 
 export default function Page() {
   const router = useRouter();
   const { user } = useUserAuth();
-
+  const [items, setItems] = useState(itemsData);
+  const [selectedItemName, setSelectedItemName] = useState("");
 
   useEffect(() => {
     if (user === null) {
@@ -24,10 +25,7 @@ export default function Page() {
     return null;
   }
 
-  const [items, setItems] = useState(itemsData);
-  const [selectedItemName, setSelectedItemName] = useState("");
-
-  const handleAddItem = (newItem) => {
+    const handleAddItem = (newItem) => {
     const itemWithId = {
       id: Math.random().toString(36).substring(2, 9),
       ...newItem,
