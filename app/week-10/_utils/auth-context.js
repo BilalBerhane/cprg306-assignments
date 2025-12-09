@@ -15,7 +15,7 @@ const AuthContext = createContext(null);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const signingRef = useRef(false); 
+  const signingRef = useRef(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -33,9 +33,12 @@ export const AuthContextProvider = ({ children }) => {
       const provider = new GithubAuthProvider();
       await signInWithPopup(auth, provider);
     } catch (err) {
-      if (err?.code === "auth/popup-blocked" || err?.code === "auth/cancelled-popup-request") {
+      if (
+        err?.code === "auth/popup-blocked" ||
+        err?.code === "auth/cancelled-popup-request"
+      ) {
         const provider = new GithubAuthProvider();
-        await signInWithRedirect(auth, provider); 
+        await signInWithRedirect(auth, provider);
       } else {
         throw err;
       }
@@ -47,7 +50,9 @@ export const AuthContextProvider = ({ children }) => {
   const firebaseSignOut = () => signOut(auth);
 
   return (
-    <AuthContext.Provider value={{ user, loading, gitHubSignIn, firebaseSignOut }}>
+    <AuthContext.Provider
+      value={{ user, loading, gitHubSignIn, firebaseSignOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

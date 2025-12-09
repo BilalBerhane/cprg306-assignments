@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useUserAuth } from "../_utils/auth-context";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
@@ -9,44 +9,42 @@ import MealIdeas from "./meal-ideas";
 import { getItems, addItem } from "../_services/shopping-list-service";
 
 export default function Page() {
+  const router = useRouter();
   const { user } = useUserAuth();
-
   const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState("");
 
+  // Redirect to login if user is null
   useEffect(() => {
-    if (!user) return;
-
-    async function loadItems() {
-      const itemsFromDb = await getItems(user.uid);
-      setItems(itemsFromDb);
+    if (user === null) {
+      router.push("/");
     }
+  }, [user, router]);
+
+  // Load shopping list from Firestore
+  useEffect(() => {
+    const loadItems = async () => {
+      if (!user) return;
+      const data = await getItems(user.uid);
+      setItems(data);
+    };
 
     loadItems();
   }, [user]);
 
-  if (!user) {
-    return (
-      <main className="min-h-screen bg-black flex items-center justify-center px-4">
-        <div className="max-w-md w-full text-center text-white">
-          <h1 className="text-4xl font-extrabold mb-4">Access denied</h1>
-          <p className="text-lg mb-6">
-            You must be logged in to view the shopping list.
-          </p>
-          <Link
-            href="/week-10"
-            className="inline-block px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
-          >
-            Go to the login page
-          </Link>
-        </div>
-      </main>
-    );
+  if (user === null) {
+    return null;
   }
 
   const handleAddItem = async (newItem) => {
+    if (!user) return;
+
     const id = await addItem(user.uid, newItem);
-    const itemWithId = { id, ...newItem };
+    const itemWithId = {
+      id,
+      ...newItem,
+    };
+
     setItems((prevItems) => [...prevItems, itemWithId]);
   };
 
@@ -65,9 +63,9 @@ export default function Page() {
   };
 
   return (
-    <main className="min-h-screen bg-black flex flex-col md:flex-row justify-center items-start gap-10 py-10 px-4">
+    <main className="min-h-screen bg-slate-800 flex flex-col md:flex-row justify-center items-start gap-10 py-10 px-4">
       <div className="w-full max-w-md">
-        <h1 className="text-4xl font-extrabold text-white mb-6">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-6">
           Shopping List + Meal Ideas
         </h1>
         <NewItem onAddItem={handleAddItem} />
